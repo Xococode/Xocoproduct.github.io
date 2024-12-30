@@ -19,7 +19,7 @@
 
 
 ## Acceso Rápido a la Aplicación
-[3D Table Drawer](https://xococode.github.io/Xocoproduct.github.io/)
+[Visor de producto](https://xococode.github.io/Xocoproduct.github.io/)
 
 
 
