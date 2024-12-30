@@ -23,24 +23,7 @@
 
 
 
-## Instalación
 
-1. **Clona el repositorio:**
-
-   \`\`\`bash
-   git clone https://github.com/tuusuario/ejemplo-visor-modelos.git
-   \`\`\`
-
-2. **Navega al directorio del proyecto:**
-
-   \`\`\`bash
-   cd ejemplo-visor-modelos
-   \`\`\`
-
-3. **Abre el archivo \`index.html\` en tu navegador web preferido:**
-
-   - Puedes hacer doble clic en el archivo \`index.html\`.
-   - O, utiliza una extensión de servidor en vivo en tu editor de código para un mejor rendimiento.
 
 ## Uso
 
@@ -64,58 +47,3 @@ Una vez que la aplicación esté abierta en tu navegador:
 6. **Navegar Enlaces**:
    - La barra lateral contiene enlaces adicionales para una navegación más profunda (actualmente enlaces de marcador de posición).
 
-## Tecnologías
-
-- **HTML5**: Estructura de la aplicación.
-- **CSS3**: Estilos y diseño responsivo.
-- **JavaScript**: Interactividad y controles dinámicos.
-- **[model-viewer](https://modelviewer.dev/)**: Componente web para renderizar modelos 3D.
-
-## Contribuciones
-
-¡Las contribuciones son bienvenidas! Por favor, sigue estos pasos:
-
-1. **Haz un fork del repositorio.**
-
-2. **Crea una nueva rama:**
-
-   \`\`\`bash
-   git checkout -b feature/TuCaracterística
-   \`\`\`
-
-3. **Realiza tus cambios y haz commit:**
-
-   \`\`\`bash
-   git commit -m "Añadir Tu Característica"
-   \`\`\`
-
-4. **Empuja la rama al repositorio remoto:**
-
-   \`\`\`bash
-   git push origin feature/TuCaracterística
-   \`\`\`
-
-5. **Abre una Pull Request.**
-
-## Licencia
-
-Este proyecto está licenciado bajo la [Licencia MIT](LICENSE).
-
----
-
-*Siéntete libre de personalizar este README para que se ajuste mejor a las necesidades específicas de tu proyecto.*
-`;
-
-            const blob = new Blob([markdownContent], { type: 'text/markdown' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'README.md';
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
-        });
-    </script>
-</body>
-</html>
