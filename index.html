@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Model Viewer Example</title>
+    <meta charset="utf-8">
+    <meta name="description" content="Interactive model viewer example with dynamic controls.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        .model-selector {
+            cursor: pointer;
+            width: 100px;
+            transition: transform 0.2s;
+        }
+        .model-selector:hover {
+            transform: scale(1.1);
+        }
+        #model-viewer {
+            width: 100%;
+            height: 500px; /* Default height */
+        }
+        label {
+            display: block;
+            margin-top: 20px;
+        }
+        body {
+            font-family: Arial, sans-serif;
+        }
+        #sidebar-toggle {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 1; /* Ensure it's above the overlay */
+            font-size: 30px;
+            cursor: pointer;
+        }
+        #sidebar {
+            position: fixed;
+            left: -250px;
+            top: 0;
+            width: 250px;
+            height: 100%;
+            background-color: #f4f4f4;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-left: 15px;
+            padding-top: 60px;
+            z-index: 2; /* Ensure sidebar is above the overlay */
+        }
+        #sidebar a, #close-sidebar {
+            padding: 10px 15px;
+            text-decoration: none;
+            font-size: 25px;
+            color: #818181;
+            display: block;
+            transition: 0.3s;
+        }
+        #sidebar a:hover, #close-sidebar:hover {
+            color: #2010f7;
+        }
+        #close-sidebar {
+            position: absolute;
+            top: 0;
+            right: 25px;
+            font-size: 36px;
+            margin-left: 50px;
+            cursor: pointer;
+        }
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.0);
+            z-index: 1; /* Below the sidebar for clickable items */
+        }
+    </style>
+</head>
+<body>
+
+    
+    <!-- Elemento model-viewer -->
+    <model-viewer id="model-viewer" src="2.glb" alt="Modelo 3D" ar ar-modes="scene-viewer webxr quick-look" camera-controls poster="poster.webp" shadow-intensity="0.36" environment-image="neutral" shadow-softness="0.99" tone-mapping="agx" style="height: 800px;"></model-viewer>
+
+
+
+
+
+    <div id="sidebar-toggle">☰</div>
+    <div class="overlay" id="overlay"></div>
+    <div id="sidebar">
+        <span id="close-sidebar">&times;</span>
+        <!-- Aquí van tus controles -->
+        <img src="blanco1.png" id="blanco-model" class="model-selector" alt="Modelo Blanco">
+        <img src="negro.png" id="negro-model" class="model-selector" alt="Modelo Negro">
+        <label for="background-color-picker">Background Color:</label>
+        <input type="color" id="background-color-picker" value="#ffffff">
+        <button id="transparent-bg">Transparent Background</button>
+        <label for="shadow-intensity-slider">Shadow Intensity:</label>
+        <input type="range" id="shadow-intensity-slider" min="0" max="1" step="0.01" value="0.36">
+        <label for="shadow-softness-slider">Shadow Softness:</label>
+        <input type="range" id="shadow-softness-slider" min="0" max="1" step="0.01" value="0.99">
+        <label for="model-height-slider">Altura del Visor:</label>
+        <input type="range" id="model-height-slider" min="300" max="2000" step="10" value="800" aria-valuemin="300" aria-valuemax="2000" aria-valuenow="800">
+        <a href="#">Link 1</a>
+        <a href="#">Link 2</a>
+        <a href="#">Link 3</a>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const toggleButton = document.getElementById('sidebar-toggle');
+            const sidebar = document.getElementById('sidebar');
+            const closeButton = document.getElementById('close-sidebar');
+            const overlay = document.getElementById('overlay');
+
+            // Función para abrir el sidebar
+            toggleButton.addEventListener('click', function() {
+                sidebar.style.left = "0";
+                overlay.style.display = "block"; // Muestra el overlay
+            });
+
+            // Función para cerrar el sidebar
+            closeButton.addEventListener('click', function() {
+                sidebar.style.left = "-250px";
+                overlay.style.display = "none"; // Oculta el overlay
+            });
+
+            // Cerrar el sidebar al hacer clic fuera de él (en el overlay)
+            overlay.addEventListener('click', function() {
+                sidebar.style.left = "-250px";
+                overlay.style.display = "none"; // Oculta el overlay
+            });
+
+            // Asegúrate de agregar aquí el resto de tu código de inicialización
+        });
+    </script>
+
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const modelViewer = document.getElementById('model-viewer');
+
+        // Cambiar modelos
+        document.getElementById('blanco-model').addEventListener('click', () => {
+            modelViewer.src = 'blanco.glb';
+        });
+        document.getElementById('negro-model').addEventListener('click', () => {
+            modelViewer.src = 'negro.glb';
+        });
+
+        // Selector de color de fondo
+        document.getElementById('background-color-picker').addEventListener('input', (event) => {
+            modelViewer.style.backgroundColor = event.target.value;
+        });
+
+        // Botón para fondo transparente
+        document.getElementById('transparent-bg').addEventListener('click', () => {
+            modelViewer.style.backgroundColor = 'transparent';
+        });
+
+        // Slider para intensidad de la sombra
+        document.getElementById('shadow-intensity-slider').addEventListener('input', (event) => {
+            modelViewer.shadowIntensity = event.target.value;
+        });
+
+        // Slider para suavidad de la sombra
+        document.getElementById('shadow-softness-slider').addEventListener('input', (event) => {
+            modelViewer.shadowSoftness = event.target.value;
+        });
+
+        // Slider para ajustar la altura del model-viewer
+        document.getElementById('model-height-slider').addEventListener('input', (event) => {
+            modelViewer.style.height = event.target.value + 'px';
+        });
+    });
+</script>
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
+</body>
+</html>
